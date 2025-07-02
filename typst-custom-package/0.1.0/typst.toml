@@ -1,4 +1,4 @@
 [package]
-name = "physique"
+name = "typst-custom-package"
 version = "0.1.0"
 entrypoint = "lib.typ"

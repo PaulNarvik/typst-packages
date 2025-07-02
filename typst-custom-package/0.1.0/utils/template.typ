@@ -1,4 +1,4 @@
-#let template(doc, author: "Paul Chaudagne", title: "") = {
+#let template(doc, author: "", title: "") = {
     set text(lang: "fr")
 
     set document(author: author, title: title)
