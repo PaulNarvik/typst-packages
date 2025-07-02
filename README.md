@@ -1,5 +1,5 @@
-= Installation
+# Installation
 
-- Pour Windows, 
+- Pour Windows, cloner le repository dans `C:\Users\User\AppData\Roaming\typst\packages\local\`
 
-- Pour Linux, cloner le repository dans ./local/share/typst/packages/local/
+- Pour Linux, cloner le repository dans `./local/share/typst/packages/local/`
