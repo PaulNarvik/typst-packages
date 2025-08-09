@@ -6,4 +6,4 @@
 
 # Configuration
 
-Pensez à modifier le fichier default.typ en mettant vos informations plutôt que les miennes.
+Pensez à créer le fichier default.typ en mettant vos informations plutôt que les miennes. Un exemple est fourni dans example.typ
