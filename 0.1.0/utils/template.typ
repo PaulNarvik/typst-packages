@@ -1,10 +1,12 @@
 #import "default.typ": *
 
-#let currentH(level: 1)={
+#let currentH(level: 1) = {
   let elems = query(selector(heading.where(level: level)).after(here()))
 
+  elems = elems.filter(it => it.location().page() == here().page())
+
   if elems.len() != 0 and elems.first().location().page() == here().page() {
-    return [#elems.first().body] 
+    return [#elems.last().body] 
   } else {
     elems = query(selector(heading.where(level: level)).before(here()))
     if elems.len() != 0 {
@@ -47,7 +49,8 @@
   collaborators: default_collaborators,
   show_outline: default_show_outline,
   outline_depth: default_outline_depth,
-  footer: default_footer
+  footer: default_footer,
+  subtitle_header: default_subtitle_header
 ) = {[
   #let collaborators = if type(collaborators) == array {collaborators.join(", ")} else {collaborators}
   #let author = if type(author) == array {author.join(", ")} else {author}
@@ -64,13 +67,14 @@
   #set page(
     header: context {
       let chapter = currentH()
-      if counter(page).get().first() > 1 [
-        #set text(size: 9pt)
-        #title -- #chapter
-        #h(1fr)
-        #author
-        #block(line(length: 100%, stroke: 0.5pt), above: 0.6em)
-      ]
+      if counter(page).get().first() > 1 {
+        set text(size: 9pt)
+        if subtitle_header [#title -- #subtitle -- #chapter]
+        else [#title -- #chapter]
+        h(1fr)
+        author
+        block(line(length: 100%, stroke: 0.5pt), above: 0.6em)
+      }
     },
 
     footer: context [
@@ -93,7 +97,19 @@
   #let header_counter(level) = context {
     counter(heading).display((..nums) => {
       let c = nums.pos().last()
-      if level == 1 { numbering("I -", c) }
+      if heading.inv_head == true { "0 -" }
+      else if c == 0 {"0 -"}
+      else if level == 1 { numbering("I -", c) }
+      else if level == 2 { numbering("1)", c) }
+      else if level == 3 { numbering("a.", c) }
+      else { numbering("(i)", c) }
+    })
+  }
+#let header_counter(level) = context {
+    counter(heading).display((..nums) => {
+      let c = nums.pos().last()
+      if c == 0 {"0 -"}
+      else if level == 1 { numbering("I -", c) }
       else if level == 2 { numbering("1)", c) }
       else if level == 3 { numbering("a.", c) }
       else { numbering("(i)", c) }

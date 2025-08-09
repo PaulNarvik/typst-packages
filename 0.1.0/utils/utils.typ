@@ -2,8 +2,8 @@
 #import "@preview/cetz-plot:0.1.0"
 #import cetz: draw, canvas, vector
 
-#let inv_head(body, num: 0) = {
-  counter(heading).update(num)
+#let inv_head(body) = {
+  counter(heading).update(0)
   heading(body, outlined: false, numbering: none)
   counter(heading).update(0)
 }
