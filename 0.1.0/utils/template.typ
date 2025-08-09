@@ -45,7 +45,8 @@
   author: default_author,
   collaborators: default_collaborators,
   show_outline: default_show_outline,
-  outline_depth: default_outline_depth
+  outline_depth: default_outline_depth,
+  footer: default_footer
 ) = {[
   #let collaborators = if type(collaborators) == array {collaborators.join(", ")} else {collaborators}
   #let author = if type(author) == array {author.join(", ")} else {author}
@@ -76,12 +77,12 @@
       #grid(
         columns: (1fr, 1fr, 1fr),
         align: (left, center, right),
-        smallcaps[Lycée du Parc],
+        footer.at(0),
         counter(page).display(
           "— 1/1 —",
           both: true
         ),
-        smallcaps[861 - $upright(H X) i^2$]
+        footer.at(1)
       )
     ]
   )
