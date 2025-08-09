@@ -42,6 +42,7 @@
 #let template(
   doc, 
   title: "",
+  subtitle: "",
   author: default_author,
   collaborators: default_collaborators,
   show_outline: default_show_outline,
@@ -144,9 +145,17 @@
   #align(center)[
     #text(size: 30pt, weight: "bold")[#title]
 
-    #text(size: 18pt, weight: "semibold")[#author #if collaborators != none {[, #collaborators]}]
+    #v(-10pt)
+    #text(size: 30pt, weight: "bold")[---]
+    #v(-15pt)
+
+    #text(size: 30pt, weight: "bold")[#subtitle]
 
     #v(10pt)
+
+    #text(size: 18pt, weight: "semibold")[#author #if collaborators != none {[, #collaborators]}]
+
+    #v(5pt)
 
     #let day(str) = datetime.today().display(str)
     #text(size: 12pt)[#convert_days(day("[weekday]")) #day("[day]") #convert_months(int(day("[month]"))) #day("[year]")]
