@@ -2,20 +2,6 @@
 #import "@preview/cetz-plot:0.1.0"
 #import cetz: draw, canvas, vector
 
-#let head(show_outline: true, outline_depth: 1) = {
-  context [
-      #align(center, box(text(document.title, size: 2em), inset: 1em, stroke: black))
-  ]
-
-  v(1em)
-  
-  if show_outline {
-    outline(title: none, depth: outline_depth, indent: auto, target: heading.where())
-    v(1em)
-    pagebreak()
-  }
-}
-
 #let inv_head(body, num: 0) = {
   counter(heading).update(num)
   heading(body, outlined: false, numbering: none)
