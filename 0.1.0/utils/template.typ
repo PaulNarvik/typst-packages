@@ -79,6 +79,9 @@
 
     footer: context [
       #set text(9pt)
+      #if counter(page).get().first() > 1 {
+        block(line(length: 100%, stroke: 0.5pt), above: 0.6em)
+      }
       #grid(
         columns: (1fr, 1fr, 1fr),
         align: (left, center, right),
