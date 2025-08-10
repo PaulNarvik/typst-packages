@@ -10,4 +10,4 @@ Pensez à créer le fichier default.typ en mettant vos informations plutôt que 
 
 # Utilisation 
 
-Pour utiliser le template, mettre `#show: doc => template(doc, vos arguments non par défaut)`
+Pour utiliser le template, mettre `#show: doc => template(doc, vos arguments non par défaut)` dans votre fichier Typst 
