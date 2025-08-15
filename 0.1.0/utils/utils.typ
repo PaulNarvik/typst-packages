@@ -64,24 +64,10 @@
   ]
 }
 
-#let def(title: "", content: "") = {
-  item("defi", title: title, content: content)
-}
-#let prop(title: "", content: "") = {
-  item("prop", title: title, content: content)
-}
-#let coro(title: "", content: "") = {
-  item("coro", title: title, content: content)
-}
-#let lemm(title: "", content: "") = {
-  item("lemm", title: title, content: content)
-}
-#let theo(title: "", content: "") = {
-  item("theo", title: title, content: content)
-}
-#let rem(title: "", content: "") = {
-  item("rema", title: title, content: content)
-}
-#let exem(title: "", content: "") = {
-  item("exem", title: title, content: content)
-}
+#let def(title, content) = {item("defi", title, content)}
+#let prop(title, content) = {item("prop", title, content)}
+#let coro(title, content) = {item("coro", title, content)}
+#let lemm(title, content) = {item("lemm", title, content)}
+#let theo(title, content) = {item("theo", title, content)}
+#let rem(title, content) = {item("rema", title, content)}
+#let exem(title, content) = {item("exem", title, content)}
