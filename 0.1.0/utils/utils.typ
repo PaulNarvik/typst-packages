@@ -44,8 +44,7 @@
 #let item(type, title: "", content: "") = {
   counter(type).step()
 
-
-  text(weight: "bold")[#conv-type(type) #context counter(type).display() #if title == "" {} else [(#title)]]
+  text(weight: "bold")[#conv-type(type) #context counter(type).display() #if title == "" {} else [(#title)] :]
 
   block(
     width: 100%,
