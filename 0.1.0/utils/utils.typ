@@ -25,14 +25,18 @@
 
 #let lim = $stretch(limits(-->))$
 
-#counter("defi")
-#counter("prop")
-#counter("coro")
-#counter("lemm")
-#counter("theo")
-#counter("rema")
-#counter("exem")
+// Déclarer les compteurs dans un dictionnaire
+#let counters = (
+  defi: counter("defi"),
+  prop: counter("prop"),
+  coro: counter("coro"),
+  lemm: counter("lemm"),
+  theo: counter("theo"),
+  rema: counter("rema"),
+  exem: counter("exem"),
+)
 
+// Fonction pour convertir le type en nom lisible
 #let conv-type(type) = {
   (
     (type == "defi", "Définition"),
@@ -47,26 +51,39 @@
     .at(1)
 }
 
+// Fonction générique pour créer un élément avec label automatique
 #let item(type, title, content) = {
-  counter(type).step()
+  if type not in counters {
+    text(fill: red)[Erreur : Type #type inconnu]
+    return
+  }
 
-  text(weight: "bold")[#conv-type(type) #context counter(type).display() #if title == "" {} else [(#title)] :]
+  // Incrémenter le compteur
+  counters.at(type).step()
 
-  block(
-    width: 100%,
-    outset: (left: -2pt),
-    inset: (left: 10pt, top: 5pt, bottom: 8pt),
-    above: 5pt,
-    stroke: (left: 2pt + black),
-  )[
-    #content
-  ]
+  // Récupérer le numéro du compteur dans un contexte
+  context {
+    text(weight: "bold", [
+      #conv-type(type) #counters.at(type).display() #if title == "" {} else [(#title)] :
+    ])
+
+    // Contenu avec barre verticale
+    block(
+      width: 100%,
+      outset: (left: -2pt, top: 8pt),
+      inset: (left: 10pt, top: 0pt, bottom: 8pt),
+      stroke: (left: 2pt + black),
+    )[
+      #content
+    ]
+  }
 }
 
-#let def(title, content) = {item("defi", title, content)}
-#let prop(title, content) = {item("prop", title, content)}
-#let coro(title, content) = {item("coro", title, content)}
-#let lemm(title, content) = {item("lemm", title, content)}
-#let theo(title, content) = {item("theo", title, content)}
-#let rem(title, content) = {item("rema", title, content)}
-#let exem(title, content) = {item("exem", title, content)}
+// Fonctions spécifiques pour chaque type
+#let defi(title, content) = { item("defi", title, content) }
+#let prop(title, content) = { item("prop", title, content) }
+#let coro(title, content) = { item("coro", title, content) }
+#let lemm(title, content) = { item("lemm", title, content) }
+#let theo(title, content) = { item("theo", title, content) }
+#let rema(title, content) = { item("rema", title, content) }
+#let exem(title, content) = { item("exem", title, content) }
