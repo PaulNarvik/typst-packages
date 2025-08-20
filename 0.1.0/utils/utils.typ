@@ -21,27 +21,33 @@
   figure(caption: caption, canvas(body))
 }
 
-#let eq = math.arrow.l.r.double.long;
+#let equ = math.arrow.l.r.double.long;
 
 #let lim = $stretch(limits(-->))$
 
 #counter("defi")
 #counter("prop")
+#counter("coro")
+#counter("lemm")
 #counter("theo")
+#counter("rema")
 #counter("exem")
 
 #let conv-type(type) = {
   (
     (type == "defi", "Définition"),
     (type == "prop", "Proposition"),
+    (type == "coro", "Corollaire"),
+    (type == "lemm", "Lemme"),
     (type == "theo", "Théorème"),
+    (type == "rema", "Remarque"),
     (type == "exem", "Exemple"),
   )
     .find(t => t.at(0))
     .at(1)
 }
 
-#let item(type, title: "", content: "") = {
+#let item(type, title, content) = {
   counter(type).step()
 
   text(weight: "bold")[#conv-type(type) #context counter(type).display() #if title == "" {} else [(#title)] :]
@@ -56,3 +62,11 @@
     #content
   ]
 }
+
+#let def(title, content) = {item("defi", title, content)}
+#let prop(title, content) = {item("prop", title, content)}
+#let coro(title, content) = {item("coro", title, content)}
+#let lemm(title, content) = {item("lemm", title, content)}
+#let theo(title, content) = {item("theo", title, content)}
+#let rem(title, content) = {item("rema", title, content)}
+#let exem(title, content) = {item("exem", title, content)}
