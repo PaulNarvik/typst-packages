@@ -70,8 +70,8 @@
     // Contenu avec barre verticale
     block(
       width: 100%,
-      outset: (left: -2pt, top: 8pt),
-      inset: (left: 10pt, top: 0pt, bottom: 8pt),
+      outset: (left: -2pt, top: 5pt),
+      inset: (left: 10pt, top: 5pt, bottom: 8pt),
       stroke: (left: 2pt + black),
     )[
       #content
@@ -87,3 +87,15 @@
 #let theo(title, content) = { item("theo", title, content) }
 #let rema(title, content) = { item("rema", title, content) }
 #let exem(title, content) = { item("exem", title, content) }
+
+#let preu(content) = {
+  text(weight: "bold", "Preuve :")
+  block(
+    width: 100%,
+    outset: (left: -2pt, top: 5pt),
+    inset: (left: 10pt, top: 5pt, bottom: 8pt),
+    stroke: (left: 2pt + black),
+  )[
+    #content
+  ]
+}
