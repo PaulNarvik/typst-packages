@@ -13,7 +13,7 @@
       return [#elems.last().body]
     }
   }
-  return "Sommaire"
+  return "Table des matières"
 }
 
 #let convert_months(num) = {
