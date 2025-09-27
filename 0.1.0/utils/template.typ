@@ -192,7 +192,7 @@
     // Outline
 
     #if show_outline {
-      align(center, { text(size: 25pt)[Sommaire] })
+      align(center, { text(size: 25pt)[Table des matières] })
       v(1.5em)
       outline(title: none, depth: outline_depth, indent: auto, target: heading.where())
       pagebreak()
