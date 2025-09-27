@@ -113,6 +113,3 @@
     #content
   ]
 }
-
-#theo("Test", "J'ai perdu \n ddd Uwu\n xD")
-#defi("Toto", "Coubeh")
