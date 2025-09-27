@@ -51,8 +51,12 @@
     .at(1)
 }
 
+#let lighten-color(color, diff: 80%) = {
+  color.transparentize(diff)
+}
+
 // Fonction générique pour créer un élément avec label automatique
-#let item(type, title, content) = {
+#let item(type, color, title, content) = {
   if type not in counters {
     text(fill: red)[Erreur : Type #type inconnu]
     return
@@ -61,32 +65,42 @@
   // Incrémenter le compteur
   counters.at(type).step()
 
-  // Récupérer le numéro du compteur dans un contexte
-  context {
-    text(weight: "bold", [
-      #conv-type(type) #counters.at(type).display() #if title == "" {} else [(#title)] :
-    ])
+  // Contenu avec barre verticale
+  block(
+    width: 100%,
+    outset: (left: -2pt, top: 2pt, right: 0pt),
+    inset: (left: 10pt, top: 5pt, bottom: 8pt, right: 10pt),
+    stroke: (
+      left: 3pt + color,
+      right: 1pt + color,
+      top: 1pt + color,
+      bottom: 1pt + color,
+    ),
+    fill: lighten-color(color),
+    radius: 5pt,
+  )[
 
-    // Contenu avec barre verticale
-    block(
-      width: 100%,
-      outset: (left: -2pt, top: 5pt),
-      inset: (left: 10pt, top: 5pt, bottom: 8pt),
-      stroke: (left: 2pt + black),
-    )[
-      #content
-    ]
-  }
+    // Récupérer le numéro du compteur dans un contexte
+    #context {
+      text(weight: "bold", [
+        #underline()[
+          #conv-type(type) #counters.at(type).display() #if title == "" {} else [(#title)] :
+        ]
+      ])
+      linebreak()
+    }
+    #content
+  ]
 }
 
 // Fonctions spécifiques pour chaque type
-#let defi(title, content) = { item("defi", title, content) }
-#let prop(title, content) = { item("prop", title, content) }
-#let coro(title, content) = { item("coro", title, content) }
-#let lemm(title, content) = { item("lemm", title, content) }
-#let theo(title, content) = { item("theo", title, content) }
-#let rema(title, content) = { item("rema", title, content) }
-#let exem(title, content) = { item("exem", title, content) }
+#let defi(title, content) = { item("defi", blue, title, content) }
+#let prop(title, content) = { item("prop", green, title, content) }
+#let coro(title, content) = { item("coro", green, title, content) }
+#let lemm(title, content) = { item("lemm", green, title, content) }
+#let theo(title, content) = { item("theo", red, title, content) }
+#let rema(title, content) = { item("rema", yellow, title, content) }
+#let exem(title, content) = { item("exem", black, title, content) }
 
 #let preu(content) = {
   text(weight: "bold", "Preuve :")
@@ -99,3 +113,6 @@
     #content
   ]
 }
+
+#theo("Test", "J'ai perdu \n ddd Uwu\n xD")
+#defi("Toto", "Coubeh")
