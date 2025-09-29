@@ -83,7 +83,7 @@
       top: 2pt + color,
       bottom: 2pt + color,
     ),
-    fill: lighten-color(color),
+    fill: lighten-color(color, diff: 90%),
     radius: 5pt,
   )[
     #place(dx: 5pt, dy: -18pt)[
