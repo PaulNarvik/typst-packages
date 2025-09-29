@@ -8,6 +8,11 @@
   counter(heading).update(0)
 }
 
+#let arrow(start, end, style: 1pt + black) = {
+  import draw: *
+  line(start, end, stroke: style, mark: (end: "straight"))
+}
+
 #let und(x) = math.underline($#x$)
 #let Tilde(it) = math.accent(it, math.tilde, size: 1.2em)
 #let Vect(it) = math.accent(it, math.arrow)
@@ -52,10 +57,10 @@
 }
 
 #let lighten-color(color, diff: 80%) = {
-  color.transparentize(diff)
+  color.lighten(diff)
 }
 
-// Fonction générique pour créer un élément avec label automatique
+// Fonction générique pour créer un élément
 #let item(type, color, title, content) = {
   if type not in counters {
     text(fill: red)[Erreur : Type #type inconnu]
@@ -65,30 +70,39 @@
   // Incrémenter le compteur
   counters.at(type).step()
 
+  v(8pt)
+
   // Contenu avec barre verticale
   block(
     width: 100%,
     outset: (left: -2pt, top: 2pt, right: 0pt),
-    inset: (left: 10pt, top: 5pt, bottom: 8pt, right: 10pt),
+    inset: (left: 10pt, top: 8pt, bottom: 8pt, right: 10pt),
     stroke: (
-      left: 3pt + color,
-      right: 1pt + color,
-      top: 1pt + color,
-      bottom: 1pt + color,
+      left: 2pt + color,
+      right: 2pt + color,
+      top: 2pt + color,
+      bottom: 2pt + color,
     ),
     fill: lighten-color(color),
     radius: 5pt,
   )[
-
-    // Récupérer le numéro du compteur dans un contexte
-    #context {
-      text(weight: "bold", [
-        #underline()[
-          #conv-type(type) #counters.at(type).display() #if title == "" {} else [(#title)] :
+    #place(dx: 5pt, dy: -18pt)[
+      // Récupérer le numéro du compteur dans un contexte
+      #context {
+        block(
+          inset: 5pt,
+          stroke: 2pt + color,
+          radius: 5pt,
+          fill: lighten-color(color),
+        )[
+          #text(weight: "bold", [
+            #conv-type(type) #counters.at(type).display() #if title == "" {} else [(#title)]
+          ])
+          #linebreak()
         ]
-      ])
-      linebreak()
-    }
+      }
+    ]
+    #v(5pt)
     #content
   ]
 }
