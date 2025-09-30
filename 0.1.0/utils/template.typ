@@ -145,10 +145,18 @@
         align(center, line(length: 100%, stroke: (paint: gray, thickness: 0.8pt))),
       )
     }
+    #set math.equation(numbering: "(1)")
+    #show math.equation: it => {
+      if it.block and not it.has("label") [
+        #counter(math.equation).update(v => v - 1)
+        #math.equation(it.body, block: true, numbering: none)#label("")
+      ] else {
+        it
+      }
+    }
+    //#set math.equation(numbering: "(1)", supplement: [])
 
-    #set math.equation(numbering: "(1)", supplement: [])
-
-    #set math.equation(
+    /*#set math.equation(
       numbering: it => {
         let count = counter(heading.where(level: 1)).at(here()).first()
         if count > 0 {
@@ -157,7 +165,7 @@
           numbering("(1)", it)
         }
       },
-    )
+    )*/
 
     #show math.equation: it => {
       math.display(it)
