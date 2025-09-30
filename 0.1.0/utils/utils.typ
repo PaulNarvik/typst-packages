@@ -75,7 +75,7 @@
   // Contenu avec barre verticale
   block(
     width: 100%,
-    outset: (left: -2pt, top: 2pt, right: 0pt),
+    outset: (left: 0pt, top: 2pt, right: 0pt),
     inset: (left: 10pt, top: 8pt, bottom: 8pt, right: 10pt),
     stroke: (
       left: 2pt + color,
@@ -83,8 +83,9 @@
       top: 2pt + color,
       bottom: 2pt + color,
     ),
-    fill: lighten-color(color, diff: 90%),
+    fill: lighten-color(color),
     radius: 5pt,
+    breakable: false,
   )[
     #place(dx: 5pt, dy: -18pt)[
       // Récupérer le numéro du compteur dans un contexte
@@ -93,7 +94,7 @@
           inset: 5pt,
           stroke: 2pt + color,
           radius: 5pt,
-          fill: lighten-color(color),
+          fill: lighten-color(color, diff: 90%),
         )[
           #text(weight: "bold", [
             #conv-type(type) #counters.at(type).display() #if title == "" {} else [(#title)]
