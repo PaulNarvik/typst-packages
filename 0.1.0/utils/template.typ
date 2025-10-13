@@ -59,6 +59,7 @@
   outline_depth: default_outline_depth,
   footer: default_footer,
   subtitle_header: default_subtitle_header,
+  all_num: default_all_num,
 ) = {
   [
     #let collaborators = if type(collaborators) == array { collaborators.join(", ") } else { collaborators }
@@ -67,6 +68,8 @@
     #set text(lang: "fr")
 
     #set document(title: title, author: author, date: datetime.today())
+
+    #metadata(all_num) <all_num>
 
     #set par(
       justify: true,
@@ -78,7 +81,7 @@
         let chapter = currentH()
         if counter(page).get().first() > 1 {
           set text(size: 9pt)
-          if subtitle_header [#title -- #subtitle -- #chapter] else [#title -- #chapter]
+          if subtitle_header [#title -- #subtitle -- #chapter] else [#title -- #chapter #query(<all_num>).first().value]
           h(1fr)
           author
           block(line(length: 100%, stroke: 0.5pt), above: 0.6em)

@@ -2,6 +2,8 @@
 #import "@preview/cetz-plot:0.1.0"
 #import cetz: canvas, draw, vector
 
+#import "./template.typ": *
+
 #let inv_head(body) = {
   counter(heading).update(0)
   heading(body, outlined: false, numbering: none)
@@ -67,8 +69,15 @@
     return
   }
 
-  // Incrémenter le compteur
-  counters.at(type).step()
+  context {
+    if query(<all_num>).first().value {
+      for count in counters.keys() {
+        counters.at(count).step()
+      }
+    } else {
+      counters.at(type).step()
+    }
+  }
 
   v(8pt)
 
@@ -97,7 +106,9 @@
           fill: lighten-color(color, diff: 80%),
         )[
           #text(weight: "bold", [
-            #conv-type(type) #counters.at(type).display() #if title == "" {} else [(#title)]
+            #conv-type(type) #counters.at(type).display() #if (
+              title == ""
+            ) {} else [(#title)]
           ])
           #linebreak()
         ]
@@ -121,8 +132,8 @@
   text(weight: "bold", "Preuve :")
   block(
     width: 100%,
-    outset: (left: -2pt, top: 5pt),
-    inset: (left: 10pt, top: 5pt, bottom: 8pt),
+    outset: (left: -2pt, top: 6pt),
+    inset: (left: 10pt, top: -2pt, bottom: 5pt),
     stroke: (left: 2pt + black),
   )[
     #content

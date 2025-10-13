@@ -4,4 +4,4 @@
 #let default_outline_depth = 2
 #let default_footer = (smallcaps[Lycée du Parc], smallcaps[861 - $upright(H X) i^2$])
 #let default_subtitle_header = false
-
+#let default_all_num = true
