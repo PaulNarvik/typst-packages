@@ -81,7 +81,7 @@
         let chapter = currentH()
         if counter(page).get().first() > 1 {
           set text(size: 9pt)
-          if subtitle_header [#title -- #subtitle -- #chapter] else [#title -- #chapter #query(<all_num>).first().value]
+          if subtitle_header [#title -- #subtitle -- #chapter] else [#title -- #chapter]
           h(1fr)
           author
           block(line(length: 100%, stroke: 0.5pt), above: 0.6em)

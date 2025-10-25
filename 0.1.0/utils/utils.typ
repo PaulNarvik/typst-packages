@@ -108,7 +108,7 @@
           #text(weight: "bold", [
             #conv-type(type) #counters.at(type).display() #if (
               title == ""
-            ) {} else [(#title)]
+            ) {} else [\- #title]
           ])
           #linebreak()
         ]
@@ -120,16 +120,16 @@
 }
 
 // Fonctions spécifiques pour chaque type
-#let defi(title, content) = { item("defi", blue, title, content) }
-#let prop(title, content) = { item("prop", green, title, content) }
-#let coro(title, content) = { item("coro", green, title, content) }
-#let lemm(title, content) = { item("lemm", green, title, content) }
+#let defi(title, content) = { item("defi", green, title, content) }
+#let prop(title, content) = { item("prop", blue, title, content) }
+#let coro(title, content) = { item("coro", blue, title, content) }
+#let lemm(title, content) = { item("lemm", blue, title, content) }
 #let theo(title, content) = { item("theo", red, title, content) }
 #let rema(title, content) = { item("rema", yellow, title, content) }
 #let exem(title, content) = { item("exem", black, title, content) }
 
 #let preu(content) = {
-  text(weight: "bold", "Preuve :")
+  underline[#text(weight: "bold", "Preuve :")]
   block(
     width: 100%,
     outset: (left: -2pt, top: 6pt),
