@@ -1,6 +1,7 @@
-#import "@preview/cetz:0.3.1"
+#import "@preview/cetz:0.4.1"
 #import "@preview/cetz-plot:0.1.0"
 #import cetz: canvas, draw, vector
+#import draw: *
 
 #import "./template.typ": *
 
@@ -10,8 +11,7 @@
   counter(heading).update(0)
 }
 
-#let arrow(start, end, style: 1pt + black) = {
-  import draw: *
+#let arrow_fig(start, end, style: 1pt + black) = {
   line(start, end, stroke: style, mark: (end: "straight"))
 }
 
@@ -41,6 +41,7 @@
   theo: counter("theo"),
   rema: counter("rema"),
   exem: counter("exem"),
+  quot: counter("quot"),
 )
 
 // Fonction pour convertir le type en nom lisible
@@ -53,6 +54,7 @@
     (type == "theo", "Théorème"),
     (type == "rema", "Remarque"),
     (type == "exem", "Exemple"),
+    (type == "quot", "Citation"),
   )
     .find(t => t.at(0))
     .at(1)
@@ -135,7 +137,29 @@
     outset: (left: -2pt, top: 6pt),
     inset: (left: 10pt, top: -2pt, bottom: 5pt),
     stroke: (left: 2pt + black),
+    breakable: false,
   )[
     #content
   ]
+}
+
+#let quot(quote, author, expl) = {
+  item(
+    "quot",
+    purple,
+    "",
+    [
+      #align(center)[
+        #block[
+          #place(top + left, dy: -8pt, dx: -15pt, text(font: "FiraCode Nerd Font", size: 14pt, "\u{F10D}"))
+          #text(weight: "bold", quote)
+          #place(top + right, dy: 6pt, dx: 13pt, text(font: "FiraCode Nerd Font", size: 14pt, "\u{F10E}"))
+        ]
+        #v(3pt)
+        #text(font: "FiraCode Nerd Font", style: "italic", "\u{F304}   " + author + "  \u{F304}")
+        #v(6pt)
+      ]
+      #expl
+    ],
+  )
 }
