@@ -84,6 +84,7 @@
           if subtitle_header [#title -- #subtitle -- #chapter] else [#title -- #chapter]
           h(1fr)
           author
+          if collaborators != none [, #collaborators]
           block(line(length: 100%, stroke: 0.5pt), above: 0.6em)
         }
       },
@@ -184,9 +185,9 @@
       #text(size: 30pt, weight: "bold")[---]
       #v(-15pt)
 
-      #text(size: 30pt, weight: "bold", hyphenate: false)[#subtitle]
+      #text(size: 26pt, weight: "bold", hyphenate: false)[#subtitle]
 
-      #v(10pt)
+      #if subtitle == "" {v(-25pt)} else {v(10pt)}
 
       #text(size: 18pt, weight: "semibold")[#author #if collaborators != none { [, #collaborators] }]
 
