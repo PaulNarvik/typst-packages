@@ -18,11 +18,11 @@ Les arguments sont :
 - `title` le titre du document
 - `subtitle` le sous-titre du document
 - `author` l'auteur principal du document (*)
-- `collaborators` des collaborateurs éventuels
-- `show_outline` présence ou non d'un sommaire
-- `outline_depth` la profondeur maximale à laquelle le sommaire affiche les titres
-- `footer` le contenu du pied de page
-- `subtitle_header` si le sous-titre doit apparaître en haut de page
-- `all_num` numérotation commune pour les définitions, lemmes, propositions, etc
+- `collaborators` des collaborateurs éventuels (*)
+- `show_outline` présence ou non d'un sommaire (*)
+- `outline_depth` la profondeur maximale à laquelle le sommaire affiche les titres (*)
+- `footer` le contenu du pied de page (*)
+- `subtitle_header` si le sous-titre doit apparaître en haut de page (*)
+- `all_num` numérotation commune pour les définitions, lemmes, propositions, etc (*)
 
 Les arguments marqués d'une étoile doivent apparaître dans le `default.typ`
