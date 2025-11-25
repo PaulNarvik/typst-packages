@@ -6,7 +6,7 @@
 
 # Configuration
 
-Pensez à créer le fichier `default.typ` en mettant vos informations plutôt que les miennes. Un exemple est fourni dans example.typ
+Pensez à créer le fichier `default.typ` en mettant vos informations plutôt que les miennes. Un exemple est fourni dans `example.typ`
 
 # Utilisation 
 
