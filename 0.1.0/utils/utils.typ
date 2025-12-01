@@ -83,7 +83,7 @@
 
   v(8pt)
 
-  // Contenu avec barre verticale
+  // Contenu dans un bloc
   block(
     width: 100%,
     outset: (left: 0pt, top: 2pt, right: 0pt),
@@ -131,15 +131,17 @@
 #let exem(title, content) = { item("exem", black, title, content) }
 
 #let preu(content) = {
-  underline[#text(weight: "bold", "Preuve :")]
-  block(
-    width: 100%,
-    outset: (left: -2pt, top: 6pt),
-    inset: (left: 10pt, top: -2pt, bottom: 5pt),
-    stroke: (left: 2pt + black),
-    breakable: false,
-  )[
-    #content
+  block(breakable: false)[
+    #underline[#text(weight: "bold", "Preuve :")]
+    #block(
+      width: 100%,
+      outset: (left: -2pt, top: 6pt),
+      inset: (left: 10pt, top: -2pt, bottom: 5pt),
+      stroke: (left: 2pt + black),
+      breakable: true,
+    )[
+      #content
+    ]
   ]
 }
 
