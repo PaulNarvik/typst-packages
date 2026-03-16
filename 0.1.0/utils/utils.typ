@@ -1,9 +1,11 @@
 #import "@preview/cetz:0.4.1"
 #import "@preview/cetz-plot:0.1.0"
+#import "@preview/colorful-boxes:1.4.3": *
 #import cetz: canvas, draw, vector
 #import draw: *
 
 #import "./template.typ": *
+#import "./template-slide.typ": *
 
 #let inv_head(body) = {
   counter(heading).update(0)
@@ -32,7 +34,6 @@
 
 #let lim = $stretch(limits(-->))$
 
-// Déclarer les compteurs dans un dictionnaire
 #let counters = (
   defi: counter("defi"),
   prop: counter("prop"),
@@ -44,7 +45,6 @@
   quot: counter("quot"),
 )
 
-// Fonction pour convertir le type en nom lisible
 #let conv-type(type) = {
   (
     (type == "defi", "Définition"),
@@ -64,10 +64,9 @@
   color.lighten(diff)
 }
 
-// Fonction générique pour créer un élément
 #let item(type, color, title, content) = {
   if type not in counters {
-    text(fill: red)[Erreur : Type #type inconnu]
+    text(fill: red)[erreur : type #type inconnu]
     return
   }
 
@@ -81,54 +80,26 @@
     }
   }
 
-  v(8pt)
-
-  // Contenu dans un bloc
-  block(
-    width: 100%,
-    outset: (left: 0pt, top: 2pt, right: 0pt),
-    inset: (left: 10pt, top: 8pt, bottom: 8pt, right: 10pt),
-    stroke: (
-      left: 2pt + color,
-      right: 2pt + color,
-      top: 2pt + color,
-      bottom: 2pt + color,
-    ),
-    fill: lighten-color(color, diff: 90%),
-    radius: 5pt,
-    breakable: false,
-  )[
-    #place(dx: 5pt, dy: -18pt)[
-      // Récupérer le numéro du compteur dans un contexte
-      #context {
-        block(
-          inset: 5pt,
-          stroke: 2pt + color,
-          radius: 5pt,
-          fill: lighten-color(color, diff: 80%),
-        )[
-          #text(weight: "bold", [
-            #conv-type(type) #counters.at(type).display() #if (
-              title == ""
-            ) {} else [\- #title]
-          ])
-          #linebreak()
-        ]
-      }
+  context {
+    outline-colorbox(
+      title: [#conv-type(type) #counters.at(type).display() #if (title == "") {} else [\- #title]],
+      color: color,
+      width: auto,
+      radius: 5pt,
+      centering:false,
+    )[
+      #content
     ]
-    #v(5pt)
-    #content
-  ]
+  }
 }
 
-// Fonctions spécifiques pour chaque type
-#let defi(title, content) = { item("defi", green, title, content) }
-#let prop(title, content) = { item("prop", blue, title, content) }
-#let coro(title, content) = { item("coro", blue, title, content) }
-#let lemm(title, content) = { item("lemm", blue, title, content) }
-#let theo(title, content) = { item("theo", red, title, content) }
-#let rema(title, content) = { item("rema", yellow, title, content) }
-#let exem(title, content) = { item("exem", black, title, content) }
+#let defi(title, content) = { item("defi", "green", title, content) }
+#let prop(title, content) = { item("prop", "blue", title, content) }
+#let coro(title, content) = { item("coro", "blue", title, content) }
+#let lemm(title, content) = { item("lemm", "blue", title, content) }
+#let theo(title, content) = { item("theo", "red", title, content) }
+#let rema(title, content) = { item("rema", "yellow", title, content) }
+#let exem(title, content) = { item("exem", "black", title, content) }
 
 #let preu(content) = {
   block(breakable: false)[
