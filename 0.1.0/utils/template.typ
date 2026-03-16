@@ -1,4 +1,4 @@
-#import "default.typ": *
+#import "./default.typ": *
 
 #let currentH(level: 1) = {
   let elems = query(selector(heading.where(level: level)).after(here()))
