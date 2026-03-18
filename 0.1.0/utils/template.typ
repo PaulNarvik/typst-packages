@@ -60,7 +60,6 @@
   outline_depth: default_outline_depth,
   footer: default_footer,
   subtitle_header: default_subtitle_header,
-  all_num: default_all_num,
 ) = {
   [
     #let collaborators = if type(collaborators) == array { collaborators.join(", ") } else { collaborators }
@@ -69,8 +68,6 @@
     #set text(lang: "fr")
 
     #set document(title: title, author: author, date: datetime.today())
-
-    #metadata(all_num) <all_num>
 
     #set par(
       justify: true,

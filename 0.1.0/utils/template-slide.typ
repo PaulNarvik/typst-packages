@@ -1,8 +1,7 @@
 #import "./example.typ": *
 #import "./default.typ": *
 
-#import "@preview/touying:0.6.3": *
-#import themes.metropolis: *
+#import "@local/touying-simpl-swufe:0.2.0": *
 
 #let template-slide(
   doc,
@@ -14,20 +13,26 @@
   outline_depth: default_outline_depth,
   footer: default_footer,
   subtitle_header: default_subtitle_header,
-  all_num: default_all_num,
 ) = {
-  show: metropolis-theme.with(
+  show: swufe-theme.with(
     aspect-ratio: "4-3",
+    lang: "fr",
     footer: self => self.info.institution,
     config-info(
       title: title,
       subtitle: subtitle,
       author: author,
       institution: footer.at(0),
+      banner: image("knight-2.jpg")
+    ),
+    config-colors(
+      primary: rgb(1, 83, 139),
+      primary-dark: rgb(0, 42, 70),
+      secondary: rgb(255, 255, 255),
+      neutral-lightest: rgb(255, 255, 255),
+      neutral-darkest: rgb(0, 0, 0),
     ),
   )
  
   doc
-
-  [#metadata(all_num) <all_num>]
 } 

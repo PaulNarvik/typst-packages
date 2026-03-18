@@ -1,11 +1,10 @@
 #import "@preview/cetz:0.4.1"
 #import "@preview/cetz-plot:0.1.0"
-#import "@preview/colorful-boxes:1.4.3": *
+#import "@preview/showybox:2.0.4": showybox
 #import cetz: canvas, draw, vector
 #import draw: *
 
-#import "./template.typ": *
-#import "./template-slide.typ": *
+#let all_num = state("all_num", true)
 
 #let inv_head(body) = {
   counter(heading).update(0)
@@ -71,7 +70,7 @@
   }
 
   context {
-    if query(<all_num>).first().value {
+    if all_num.get() {
       for count in counters.keys() {
         counters.at(count).step()
       }
@@ -81,25 +80,36 @@
   }
 
   context {
-    outline-colorbox(
+    showybox(
+      title-style: (
+        boxed-style: (
+          anchor: (
+            x: left,
+            y: horizon
+          ),
+          radius: 5pt,
+        )
+      ),
+      frame: (
+        title-color: color.darken(40%),
+        body-color: color.lighten(80%),
+        footer-color: color.lighten(60%),
+        border-color: color.darken(60%),
+        radius: 8pt
+      ),
       title: [#conv-type(type) #counters.at(type).display() #if (title == "") {} else [\- #title]],
-      color: color,
-      width: auto,
-      radius: 5pt,
-      centering:false,
-    )[
-      #content
-    ]
+      breakable: false
+    )[#content]
   }
 }
 
-#let defi(title, content) = { item("defi", "green", title, content) }
-#let prop(title, content) = { item("prop", "blue", title, content) }
-#let coro(title, content) = { item("coro", "blue", title, content) }
-#let lemm(title, content) = { item("lemm", "blue", title, content) }
-#let theo(title, content) = { item("theo", "red", title, content) }
-#let rema(title, content) = { item("rema", "yellow", title, content) }
-#let exem(title, content) = { item("exem", "black", title, content) }
+#let defi(title, content) = { item("defi", green, title, content) }
+#let prop(title, content) = { item("prop", blue, title, content) }
+#let coro(title, content) = { item("coro", blue, title, content) }
+#let lemm(title, content) = { item("lemm", blue, title, content) }
+#let theo(title, content) = { item("theo", red, title, content) }
+#let rema(title, content) = { item("rema", yellow, title, content) }
+#let exem(title, content) = { item("exem", black, title, content) }
 
 #let preu(content) = {
   block(breakable: false)[
