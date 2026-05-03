@@ -5,6 +5,7 @@
 #import draw: *
 
 #let all_num = state("all_num", true)
+#let box_thickness = state("box_thickness", 2pt)
 
 #let inv_head(body) = {
   counter(heading).update(0)
@@ -59,10 +60,6 @@
     .at(1)
 }
 
-#let lighten-color(color, diff: 80%) = {
-  color.lighten(diff)
-}
-
 #let item(type, color, title, content) = {
   if type not in counters {
     text(fill: red)[erreur : type #type inconnu]
@@ -88,17 +85,19 @@
             y: horizon
           ),
           radius: 5pt,
-        )
+        ),
+        color: black,
       ),
       frame: (
-        title-color: color.darken(40%),
+        title-color: color.lighten(70%),
         body-color: color.lighten(80%),
         footer-color: color.lighten(60%),
-        border-color: color.darken(60%),
-        radius: 8pt
+        border-color: color.darken(10%),
+        radius: 8pt,
+        thickness: box_thickness.get()
       ),
       title: [#conv-type(type) #counters.at(type).display() #if (title == "") {} else [\- #title]],
-      breakable: false
+      breakable: false,
     )[#content]
   }
 }
@@ -112,18 +111,15 @@
 #let exem(title, content) = { item("exem", black, title, content) }
 
 #let preu(content) = {
-  block(breakable: false)[
-    #underline[#text(weight: "bold", "Preuve :")]
-    #block(
+    underline[#text(weight: "bold", "Preuve :")]
+    block(
       width: 100%,
       outset: (left: -2pt, top: 6pt),
       inset: (left: 10pt, top: -2pt, bottom: 5pt),
       stroke: (left: 2pt + black),
-      breakable: true,
     )[
       #content
     ]
-  ]
 }
 
 #let quot(quote, author, expl) = {
