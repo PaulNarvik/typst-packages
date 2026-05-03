@@ -4,6 +4,8 @@
 
 - Pour Linux, cloner le repository dans `~/.local/share/typst/packages/local/`
 
+Depuis la dernière version, nécessite l'installation en local (même procédure) de mon fork d'un template touying (https://github.com/PaulNarvik/touying-simpl-swufe).
+
 # Configuration
 
 Pensez à créer le fichier `default.typ` en mettant vos informations plutôt que les miennes. Un exemple est fourni dans `example.typ`
